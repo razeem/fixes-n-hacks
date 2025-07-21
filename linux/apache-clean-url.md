@@ -1,0 +1,1 @@
+# Apache Clean URLs
