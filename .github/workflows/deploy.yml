@@ -21,6 +21,13 @@ jobs:
         run: |
           pip install mkdocs-material
 
-      - name: Deploy to GitHub Pages
+      - name: Configure git for GitHub Actions
         run: |
-          mkdocs gh-deploy --force
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdocs gh-deploy --force --remote-branch gh-pages --remote-name origin
