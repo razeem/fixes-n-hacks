@@ -1,1 +1,0 @@
-# SMTP Configuration (Gmail / SendGrid)

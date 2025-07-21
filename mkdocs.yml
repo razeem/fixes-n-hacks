@@ -1,0 +1,36 @@
+site_name: Fixes & Hacks
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.instant
+    - navigation.top
+    - search.highlight
+    - search.suggest
+nav:
+  - Home: index.md
+  - Drupal:
+      - Setup: drupal/setup.md
+      - Multisite: drupal/multisite.md
+      - Core Upgrade: drupal/upgrade.md
+      - Dependency Injection: drupal/dependency-injection.md
+      - Drush Commands: drupal/drush-commands.md
+      - Misc Tips: drupal/misc-tips.md
+      - Code Snippets: drupal/code-snippets.md
+  - Angular:
+      - Dummy Server: angular/dummy-server.md
+  - Git:
+      - Common Issues: git/common-issues.md
+  - jQuery:
+      - Upgrade Issues: jquery/upgrade-issues.md
+  - Linux:
+      - Deployment: linux/deployment.md
+      - Composer, Drush, Console: linux/composer-drush-console.md
+  - Misc & Tools:
+      - Composer: tools/composer.md
+      - VS Code: tools/vscode.md
+      - Google Sheets: tools/google-sheets.md
+      - Node: tools/node/logging.md
+      - Regex: tools/regex.md
