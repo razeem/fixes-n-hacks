@@ -5,6 +5,8 @@
 - Change ownership:
 ```
 sudo chown <user-name>:<group-name> -R <file-path>
+sudo chown $(whoami):$(id -gn) -R <file-path>
+
 ```
 - Change permission:
 ```
@@ -27,15 +29,6 @@ wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/latest/d
 chmod +x drush.phar
 sudo mv drush.phar /usr/local/bin/drush
 drush init
-```
-
-## Install Drupal Console (Linux)
-```
-curl https://drupalconsole.com/installer -L -o drupal.phar
-php drupal.phar
-sudo mv drupal.phar /usr/local/bin/drupal
-chmod +x /usr/local/bin/drupal
-drupal init
 ```
 
 ## Install Node.js and npm
