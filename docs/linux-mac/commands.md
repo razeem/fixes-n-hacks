@@ -1,4 +1,16 @@
-# Composer, Drush, Console Setup
+# Commands used
+
+## File Permission Issues on Mac
+
+- Change ownership:
+```
+sudo chown <user-name>:<group-name> -R <file-path>
+```
+- Change permission:
+```
+sudo chmod 755 -R <file-path>
+```
+
 
 ## Install Composer (Linux)
 ```

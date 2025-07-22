@@ -16,21 +16,3 @@ git reset --hard origin/develop
 [remote "origin"]
 url = https://<USER>@bitbucket.org/<TEAM>/<REPO>.git
 ```
-### Different SSH keys for different projects
-- Create SSH key: `ssh-keygen -f ~/.ssh/personal`
-- Create/edit `~/.ssh/config`:
-```
-Host bitbucket.org
-  HostName bitbucket.org
-  User git
-  IdentityFile ~/.ssh/id_rsa
-Host personal
-  HostName bitbucket.org
-  User git
-  IdentityFile ~/.ssh/personal
-```
-- Clone/set remote:
-```
-git clone personal:<TEAM>/<REPO>.git
-git remote set-url origin personal:<TEAM>/<REPO>.git
-```
