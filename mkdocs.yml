@@ -32,5 +32,5 @@ nav:
       - Composer: tools/composer.md
       - VS Code: tools/vscode.md
       - Google Sheets: tools/google-sheets.md
-      - Node: tools/node/logging.md
+      - Node: tools/logging-with-node.md
       - Regex: tools/regex.md
