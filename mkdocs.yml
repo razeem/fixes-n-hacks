@@ -9,6 +9,7 @@ theme:
     - navigation.top
     - search.highlight
     - search.suggest
+  favicon: 'favicon.ico'
 nav:
   - Home: index.md
   - Drupal:
