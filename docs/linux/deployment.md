@@ -4,11 +4,11 @@
 - Modify the Vhost as below:
 ```
 <VirtualHost *:443>
- ServerName ert-angular.local.com
- DocumentRoot "/var/www/html/angular-ert"
+ ServerName <PROJECT>.local.com
+ DocumentRoot "/var/www/html/<PROJECT>"
  SSLProxyEngineOn
- ProxyPass "/jwt" "https://portalert002.4spotsdemo.com/jwt"
- ProxyPass "/api" "https://portalert002.4spotsdemo.com/api"
+ ProxyPass "/jwt" "https://<API_SERVER>/jwt"
+ ProxyPass "/api" "https://<API_SERVER>/api"
 </VirtualHost>
 ```
 

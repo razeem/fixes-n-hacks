@@ -2,7 +2,7 @@
 
 ## Install Multisite in Existing Project
 ```
-drush site-install --db-url=mysql://root:spots@localhost/bac009_portal --sites-subdir=portal --yes --account-mail="alameen@4spots.com" --account-name=superadmin --account-pass=123456 --site-mail="tech@4spots.com" --site-name="bac portal"
+drush site-install --db-url=mysql://root:<PASSWORD>@localhost/<SITE_FOLDER> --sites-subdir=portal --yes --account-mail="<EMAIL>" --account-name=superadmin --account-pass=123456 --site-mail="<EMAIL>" --site-name="bac portal"
 ```
 
 ## Multisite Config Export
@@ -12,11 +12,11 @@ drush site-install --db-url=mysql://root:spots@localhost/bac009_portal --sites-s
   ```
 - Set config path in `settings.php`:
   ```php
-  $config_directories['sync'] = '../config/sync/portal';
+  $config_directories['sync'] = '../config/sync/<SITE_FOLDER>';
   ```
 - Export config for a particular site:
   ```
-drupal --uri=portal.localhost config:export
+drupal --uri=<SITE>.localhost config:export
   ```
   Config files are in `sites/multisite_folder/files/config`.
 
@@ -36,5 +36,5 @@ drupal --uri=portal.localhost config:export
   ```
 - Clear cache for a specific URI:
   ```
-drupal cr all --uri=portal.localhost
+drupal cr all --uri=<SITE>.localhost
   ```

@@ -7,10 +7,10 @@ Install PHP and enable `mod_proxy` and `mod_proxy_http` in Apache.
 Example Apache vhost config:
 ```apache
 <VirtualHost *:80>
-  ServerName ert-angular.local.com
-  DocumentRoot "/var/www/html/angular-ert"
-  ProxyPass "/jwt" "http://portalert002.4spotsdemo.com/jwt"
-  ProxyPass "/api" "http://portalert002.4spotsdemo.com/api"
+  ServerName <PROJECT>.local.com
+  DocumentRoot "/var/www/html/<PROJECT>"
+  ProxyPass "/jwt" "http://<API_SERVER>/jwt"
+  ProxyPass "/api" "http://<API_SERVER>/api"
 </VirtualHost>
 ```
 
@@ -50,7 +50,7 @@ npm install json-server
     "status": true,
     "data": {
       "userDetails": {
-        "name": "Al Waleed Bin Talal",
+        "name": "<USER_NAME>",
         "imageUrl": "http://localhost:4200/assets/images/user.jpg"
       },
       "menu": [
@@ -106,5 +106,49 @@ ng g s UserDetails
 ```
 Add to `app.module.ts`:
 ```typescript
-providers: [UserDetailsService],
+providers: [<SERVICE_NAME>],
+```
+
+## Bitbucket: Link repo commit messages to task ID
+- Go to Repository Settings > Links > Create New Link
+- Link URL: `https://<COMPANY>.me/projects/<project-id>/tasks/\1`
+- Link TEXT: `<project-code>-(\d+)`
+
+## Git Setup
+
+- Switch to https in `.git/config`:
+```
+[remote "origin"]
+url = https://<USER>@bitbucket.org/<TEAM>/<REPO>.git
+```
+
+- Or, use SSH:
+```
+[remote "origin"]
+url = git@bitbucket.org:<TEAM>/<REPO>.git
+```
+
+- Create SSH key: `ssh-keygen -f ~/.ssh/personal`
+
+- Add to ssh-agent:
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/personal
+```
+
+- Clone/set remote:
+```
+git clone personal:<TEAM>/<REPO>.git
+git remote set-url origin personal:<TEAM>/<REPO>.git
+```
+
+## File Permission Issues on Mac
+
+- Change ownership:
+```
+sudo chown <user-name>:<group-name> -R <file-path>
+```
+- Change permission:
+```
+sudo chmod 755 -R <file-path>
 ```

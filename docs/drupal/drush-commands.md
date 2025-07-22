@@ -47,7 +47,7 @@ drush config-export --destination="<folder-path>"
   ```
 - Dump database and files:
   ```
-drush sql-dump > "/4spDrive/${PWD##*/}/$(date +"%Y-%m-%d")/${PWD##*/}-$(date +"%Y-%m-%d").sql"
+drush sql-dump > "/<COMPANY_DRIVE>/${PWD##*/}/$(date +"%Y-%m-%d")/${PWD##*/}-$(date +"%Y-%m-%d").sql"
   ```
 - Import database:
   ```
@@ -76,3 +76,7 @@ lando drush ms gea_country_migration
 lando drush mim gea_country_migration --limit=1
 lando drush mr gea_country_migration
   ```
+- Example:
+```
+drush site-install standard --db-url=mysql://root:<PASSWORD>@localhost/<SITE_FOLDER> --account-mail="<EMAIL>" --account-name=superadmin --account-pass=123456 --site-mail="<EMAIL>" --site-name="<SITE_NAME>"
+```

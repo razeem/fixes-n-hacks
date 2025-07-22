@@ -51,12 +51,12 @@ If there is an error, ensure `settings.php` is created. Delete all tables if nee
 
 Or use:
 ```
-drush site-install standard --db-url=mysql://[db-user]:[db-pass]@localhost/[db-name] --account-mail="[mail-id]" --account-name=[site-admin] --account-pass=[site-admin-password] --site-mail="[site-mail-id]" --site-name="[name-of-site]"
+drush site-install --db-url=mysql://root:<PASSWORD>@localhost/<SITE_FOLDER> --sites-subdir=portal --yes --account-mail="<EMAIL>" --account-name=superadmin --account-pass=123456 --site-mail="<EMAIL>" --site-name="<SITE_NAME>"
 ```
 
 Example:
 ```
-drush site-install standard --db-url=mysql://root:spots@localhost/spm001 --account-mail="alameen@4spots.com" --account-name=superadmin --account-pass=123456 --site-mail="tech@4spots.com" --site-name="SPM001"
+drush site-install standard --db-url=mysql://root:password@localhost/dbname --account-mail="<EMAIL>" --account-name=superadmin --account-pass=123456 --site-mail="<EMAIL>" --site-name="<PROJECT>"
 ```
 
 ## Synchronize UUID
@@ -85,6 +85,10 @@ If error, check `settings.php` and set:
 ```
 $config_directories['sync'] = '../config/sync';
 ```
+- Set config path in `settings.php`:
+  ```php
+  $config_directories['sync'] = '../config/sync/<SITE_FOLDER>';
+  ```
 
 ## Cloning a Live Project (Windows)
 ```

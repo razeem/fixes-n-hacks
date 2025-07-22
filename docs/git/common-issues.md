@@ -2,7 +2,7 @@
 
 ## Bitbucket: Link repo commit messages to task ID
 - Go to Repository Settings > Links > Create New Link
-- Link URL: `https://4spots.me/projects/<project-id in intranet>/tasks/\1`
+- Link URL: `https://<COMPANY_DOMAIN>/projects/<project-id in intranet>/tasks/\1`
 - Link TEXT: `<project-code for the project>-(\d+)`
 
 ## Issues
@@ -14,7 +14,7 @@ git reset --hard origin/develop
 - Switch to https in `.git/config`:
 ```
 [remote "origin"]
-url = https://razeem4spots@bitbucket.org/team4spots/abo001.git
+url = https://<USER>@bitbucket.org/<TEAM>/<REPO>.git
 ```
 ### Different SSH keys for different projects
 - Create SSH key: `ssh-keygen -f ~/.ssh/personal`
@@ -31,6 +31,6 @@ Host personal
 ```
 - Clone/set remote:
 ```
-git clone personal:star-jet/ppr001-backend.git
-git remote set-url origin personal:star-jet/ppr001-backend.git
+git clone personal:<TEAM>/<REPO>.git
+git remote set-url origin personal:<TEAM>/<REPO>.git
 ```
