@@ -1,106 +1,63 @@
-# Drupal 8 Setup
+# Local setup
+## Instructions using DDEV
 
-## Create a D7 Project using Composer
-```
-composer create-project drupal-composer/drupal-project:7.x-dev drupal7 --stability dev --no-interaction
-```
+1. Install DDEV
+Ensure DDEV is installed on your system. Follow the installation guide for your OS on the DDEV official site.
 
-## Create a D8 Project using Composer
+2. Set Up Your Project Directory
+`mkdir drupal11 && cd drupal11`
 
-Navigate to your desired project location:
-```
-cd /var/www/html
-```
+3. Configure DDEV
+Run the DDEV configuration command specifying Drupal and PHP 8.3:
+    ```BASH
+    ddev config --project-type=drupal --php-version=8.3 --docroot=web
+    ```
 
-**Deprecated method (creates project in web folder):**
-```
-composer create-project drupal-composer/drupal-project:8.x-dev d8_test_project --stability dev --no-interaction
-```
+4. Start DDEV Services
+`ddev start`
 
-**Recommended method:**
-```
-composer create-project drupal/recommended-project project_dir
-```
-Or for a specific version:
-```
-composer create-project drupal/core-recommended:8.x-dev d8_test_project --stability dev --no-interaction
-```
+5. Install Drupal Using Composer
+Download the Drupal 11 recommended project:
+`ddev composer create drupal/recommended-project:^11`
+    **Or for a specific version:**
+    ```
+    composer create-project drupal/core-recommended:11.x-dev d11_test_project --stability dev --no-interaction
+    ```
+6. Install Drush (Drupal Shell)
+Drush is essential for efficient Drupal management:
+`ddev composer require drush/drush`
 
-**Another deprecated method:**
-```
-composer create-project drupal/drupal my_site_name 8.1.*@dev --no-dev
-```
+7. Install and Configure Drupal
+Use Drush to install Drupal:
+`ddev drush site:install --account-name=admin --account-pass=admin -y`
 
-## Create a Lightning Distribution Site
-```
-composer create-project acquia/lightning-project MYPROJECT
-```
+8. Launch Your Site
+Open your site in the browser:
+`ddev launch`
+Alternatively, auto-login:
+`ddev launch $(ddev drush uli)`
 
-## Cloning a Live Project (Linux)
-```
-git clone https://[username]@bitbucket.org/[repo_name].git 
-cd repo_name
-composer install
-```
+## Common Issues
 
-### Install Database
-```
-drupal si
-```
-If there is an error, ensure `settings.php` is created. Delete all tables if needed (for Lightning Distribution).
-
-Or use:
-```
-drush site-install --db-url=mysql://root:<PASSWORD>@localhost/<SITE_FOLDER> --sites-subdir=portal --yes --account-mail="<EMAIL>" --account-name=superadmin --account-pass=123456 --site-mail="<EMAIL>" --site-name="<SITE_NAME>"
+### While Cloning a Live Project
+We might encounter issue while config import after installing the site
+#### Site UUID mismatch
+- Edit the `system.site` record in the database config table and update the UUID.
+- `ddev drush cset system.site uuid "$(cat config/sync/system.site.yml | grep uuid | awk '{print $2}')"`
+#### Shortcut set mismatch issue
+- `ddev drush entity:delete shortcut_set`
+### Error in loading site
+If error, check `settings.php` Set config path in `settings.php`:
+```php
+$settings['config_sync_directory'] = '../config/sync';
 ```
 
-Example:
-```
-drush site-install standard --db-url=mysql://root:password@localhost/dbname --account-mail="<EMAIL>" --account-name=superadmin --account-pass=123456 --site-mail="<EMAIL>" --site-name="<PROJECT>"
-```
-
-## Synchronize UUID
-```
-cat config/sync/system.site.yml | grep uuid
-drupal config:override "system.site" uuid "<new-uuid>"
-# OR
-drush config-set "system.site" uuid "<new-uuid>"
-```
-
-## Delete Shortcut Set
-```
-drupal entity:delete shortcut_set default
-# OR (not tested)
-drush ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
-ddev drush entity:delete shortcut_link shortcut_set
-```
-
-## Import Configuration
+### Import Configuration
 ```
 drush cim
-# OR
-drupal ci
-```
-If error, check `settings.php` and set:
-```
-$config_directories['sync'] = '../config/sync';
-```
-- Set config path in `settings.php`:
-  ```php
-  $config_directories['sync'] = '../config/sync/<SITE_FOLDER>';
-  ```
-
-## Cloning a Live Project (Windows)
-```
-git clone https://[username]@bitbucket.org/[repo_name].git 
-cd repo_name
-composer install
-vendor/bin/drupal si
-# In CMD
-vendor\bin\drupal si
 ```
 
-Synchronize UUID and import config as above.
+## Debugging Configuration
 
 ## Setting up Development Environment
 - (Optional) Change ownership:
@@ -123,17 +80,22 @@ Synchronize UUID and import config as above.
   sudo chmod 755 web/sites/default/settings.local.php
   ```
 
-## Debugging Configuration
-- In `settings.local.php`, uncomment:
+## Development settings
+
+### Enable Development mode
+Add or uncomment these in `settings.php` or `settings.local.php`
   ```php
+  $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
+
   $config['system.performance']['css']['preprocess'] = FALSE;
   $config['system.performance']['js']['preprocess'] = FALSE;
+
   $settings['cache']['bins']['render'] = 'cache.backend.null';
   $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
   $settings['cache']['bins']['page'] = 'cache.backend.null';
   ```
 
-## Enable Twig Debugging
+### Enable Twig Debugging
 - Create `sites/development.services.yml`:
   ```yaml
   parameters:
@@ -146,13 +108,7 @@ Synchronize UUID and import config as above.
     cache.backend.null:
       class: Drupal\Core\Cache\NullBackendFactory
   ```
-
-## For Drupal 7
-- In `settings.php`:
-  ```php
-  $conf['theme_debug'] = TRUE;
-  ```
-- Or via drush:
+#### Via drush:
   ```
   drush variable-set theme_debug 1
   ```

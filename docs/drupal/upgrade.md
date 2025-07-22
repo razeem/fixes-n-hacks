@@ -29,17 +29,17 @@
 - **Frontend Issues:** jQuery 3 upgrade may break some functions and themes.
 - **PHP Version:** Higher PHP version may be required.
 - **MySQL Errors (e.g. missing column revision-default):**
-  ```
+```
   drush sql-query "ALTER TABLE block_content_revision ADD COLUMN revision_default tinyint(5) AFTER revision_log"
-  ```
+```
 - **Config errors:**
-  ```
+```
 drush sql-query "DELETE FROM config WHERE name = 'system.action.comment_delete_action';DELETE FROM config WHERE name = 'views.view.comment';TRUNCATE TABLE cache_config;"
   ```
 - **Fields deletion pending error:**
-  ```
+```
 drush php:eval 'field_purge_batch(50000);'
-  ```
+```
 
 ## After Upgrade
 - Login and check `/admin/reports/updates` for module updates.
