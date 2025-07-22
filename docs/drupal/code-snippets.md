@@ -107,6 +107,8 @@ $webform = \Drupal::entityTypeManager()->getStorage('webform')->load(webformId)-
 ```
 
 ## Adding a Twig extension
+
+Use drush command for this below is a sample code snippet
 ```php
 class MymoduleTwigExtension extends TwigExtension {
   public function getFunctions() {

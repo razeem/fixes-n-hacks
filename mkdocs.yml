@@ -22,12 +22,13 @@ nav:
   - Angular:
       - Dummy Server: angular/dummy-server.md
   - Git:
+      - Commands: git/commands.md
       - Common Issues: git/common-issues.md
   - jQuery:
       - Upgrade Issues: jquery/upgrade-issues.md
-  - Linux:
-      - Deployment: linux/deployment.md
-      - Composer, Drush, Console: linux/composer-drush-console.md
+  - Linux & Mac:
+      - Commands: linux-mac/commands.md
+      - Deployment: linux-mac/deployment.md
   - Misc & Tools:
       - Composer: tools/composer.md
       - VS Code: tools/vscode.md
