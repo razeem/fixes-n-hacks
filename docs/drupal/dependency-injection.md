@@ -28,17 +28,17 @@ public static function create(ContainerInterface $container) {
 ## Method for REST Plugins
 ```php
 /**
- * Drupal\zain_jwt\ZainLoginService definition.
- * @var \Drupal\zain_jwt\ZainLoginService
+ * Drupal\<SERVICE>_jwt\<Service>LoginService definition.
+ * @var \Drupal\<SERVICE>_jwt\<Service>LoginService
  */
-protected $zainLoginService;
+protected $serviceLoginService;
 
 /**
  * {@inheritdoc}
  */
 public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
   $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-  $instance->zainLoginService = $container->get('zain_jwt.login');
+  $instance->serviceLoginService = $container->get('<service>_jwt.login');
   return $instance;
 }
 ```

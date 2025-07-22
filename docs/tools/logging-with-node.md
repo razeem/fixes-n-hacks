@@ -13,7 +13,7 @@ function writeLogInFile(message, object = false, fileName = 'node-server-custom-
       return value;
     };
   };
-  let filePath = `/var/log/zain-eshop/${fileName}`;
+  let filePath = `/var/log/<project-path>/${fileName}`;
   let messageLog = "\r\n" + new Date().toLocaleString() + ' >> ';
   messageLog += object ? JSON.stringify(message, getCircularReplacer()) : message;
   if (fs.existsSync(filePath))
